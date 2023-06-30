@@ -3,9 +3,28 @@ import PropTypes from 'prop-types';
 
 import Sidebar from './Sidebar';
 import Header from './Header';
+import { useRouter } from 'next/router';
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import { setIntendedPath } from '../../redux/action/auth';
 
 const SidebarLayout = ({ children }) => {
   const theme = useTheme();
+  const dispatch = useDispatch();
+  const router = useRouter();
+  const auth = useSelector((state) => state.auth)
+  const { token } = auth;
+
+  useEffect(() => {
+    if (!auth.token) {
+      dispatch(setIntendedPath(router.asPath));
+      router.replace('/login');
+    }
+  }, [token]);
+
+  if (auth.token == null) {
+    return (<></>)
+  }
 
   return (
     <>
@@ -23,16 +42,16 @@ const SidebarLayout = ({ children }) => {
             boxShadow:
               theme.palette.mode === 'dark'
                 ? `0 1px 0 ${alpha(
-                    lighten(theme.colors.primary.main, 0.7),
-                    0.15
-                  )}, 0px 2px 4px -3px rgba(0, 0, 0, 0.2), 0px 5px 12px -4px rgba(0, 0, 0, .1)`
+                  lighten(theme.colors.primary.main, 0.7),
+                  0.15
+                )}, 0px 2px 4px -3px rgba(0, 0, 0, 0.2), 0px 5px 12px -4px rgba(0, 0, 0, .1)`
                 : `0px 2px 4px -3px ${alpha(
-                    theme.colors.alpha.black[100],
-                    0.1
-                  )}, 0px 5px 12px -4px ${alpha(
-                    theme.colors.alpha.black[100],
-                    0.05
-                  )}`
+                  theme.colors.alpha.black[100],
+                  0.1
+                )}, 0px 5px 12px -4px ${alpha(
+                  theme.colors.alpha.black[100],
+                  0.05
+                )}`
           }
         }}
       >

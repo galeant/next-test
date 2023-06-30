@@ -22,6 +22,8 @@ import ExpandMoreTwoToneIcon from '@mui/icons-material/ExpandMoreTwoTone';
 import AccountBoxTwoToneIcon from '@mui/icons-material/AccountBoxTwoTone';
 import LockOpenTwoToneIcon from '@mui/icons-material/LockOpenTwoTone';
 import AccountTreeTwoToneIcon from '@mui/icons-material/AccountTreeTwoTone';
+import { useDispatch } from 'react-redux';
+import { logout } from '../../../../redux/action/auth';
 
 const UserBoxButton = styled(Button)(
   ({ theme }) => `
@@ -59,6 +61,7 @@ const UserBoxDescription = styled(Typography)(
 );
 
 function HeaderUserbox() {
+  const dispatch = useDispatch();
   const user = {
     name: 'Catherine Pike',
     avatar: '/static/images/avatars/1.jpg',
@@ -75,6 +78,10 @@ function HeaderUserbox() {
   const handleClose = () => {
     setOpen(false);
   };
+
+  const logoutAction = () => {
+    dispatch(logout())
+  }
 
   return (
     <>
@@ -137,7 +144,7 @@ function HeaderUserbox() {
         </List>
         <Divider />
         <Box sx={{ m: 1 }}>
-          <Button color="primary" fullWidth>
+          <Button color="primary" fullWidth onClick={logoutAction}>
             <LockOpenTwoToneIcon sx={{ mr: 1 }} />
             Sign out
           </Button>
