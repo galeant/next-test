@@ -6,6 +6,7 @@ import Footer from 'src/components/Footer';
 import TableComponent from 'src/components/TableComponent'
 import { DatePicker } from '@mui/x-date-pickers';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
+import RefreshIcon from '@mui/icons-material/Refresh';
 
 import { useSelector } from 'react-redux';
 import { getOrderList } from '../src/redux/action/order';
@@ -15,8 +16,9 @@ import orderTableConfig from '../src/tableConfig/orderTable'
 import { useRouter } from 'next/router';
 import { orderStatus } from '../src/enums'
 import dayjs from 'dayjs';
+import { fi } from 'date-fns/locale';
 
-const Search = ({ search, setSearch, searchDate, setSearchDate, searchStatus, setSearchStatus, searchFieldHandler, searchDateFieldHandler, searchStatusFieldHandler }) => {
+const Search = ({ search, setSearch, searchDate,  searchStatus,  searchFieldHandler, searchDateFieldHandler, searchStatusFieldHandler }) => {
     return (
         <Grid container spacing={2} sx={{ p: 2 }}>
             <Grid item xs={12} md={2}>
@@ -39,6 +41,17 @@ const Search = ({ search, setSearch, searchDate, setSearchDate, searchStatus, se
                         <TextField
                             {...params}
                             variant="outlined"
+                            InputProps={{
+                                startAdornment: <InputAdornment position="start"><CalendarMonthIcon/></InputAdornment>,
+                                endAdornment: <InputAdornment position="end">
+                                    <RefreshIcon 
+                                        sx={{cursor:'pointer',':hover':{cursor:'pointer'}}}
+                                        aria-label="toggle password visibility"    
+                                        onClick={() => searchDateFieldHandler(null)}
+                                        edge="end"
+                                    />
+                                </InputAdornment>,
+                              }}
                         />
                     )}
                 />
@@ -88,9 +101,13 @@ const OrderPage = () => {
     }
 
     const searchDateFieldHandler = (date) => {
-        const value = dayjs(date).format('YYYY-MM-DD')
+        let value = null;
+        if(date != null){
+            value = dayjs(date).format('YYYY-MM-DD')
+        }
         setSearchDate(date)
         searchHandler(value, 'date')
+        
     }
 
     const searchStatusFieldHandler = (e) => {
