@@ -2,10 +2,9 @@ const initialState = {
     token: null,
     user: null,
     intendedPath: '/',
-    errors: {}
 };
 
-const authReducer = (state = initialState, { type, data, path, message }) => {
+const authReducer = (state = initialState, { type, data, path }) => {
     switch (type) {
         case 'SET_AUTH':
             return { ...state, ...data };
@@ -14,8 +13,6 @@ const authReducer = (state = initialState, { type, data, path, message }) => {
         case 'DELETE_AUTH':
             const setEmpty = { token: null, user: null }
             return { ...state, ...setEmpty };
-        case 'SET_ERROR':
-            return { ...state, errors: message };
         default:
             return state;
     }

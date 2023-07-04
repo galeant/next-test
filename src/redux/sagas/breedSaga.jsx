@@ -8,8 +8,8 @@ function* getList({ queryParams }) {
     const params = new URLSearchParams();
     for (const key in queryParams) {
         params.append(key, queryParams[key]);
-      }
-      
+    }
+
     const url = `${mainUrl}/list?${params}`
     try {
         const data = yield call(getData, url);
@@ -19,7 +19,7 @@ function* getList({ queryParams }) {
     }
 }
 
-function* getDetail({id}) {
+function* getDetail({ id }) {
     const url = `${mainUrl}/${id}/detail`
     try {
         const data = yield call(getData, url);
@@ -29,7 +29,7 @@ function* getDetail({id}) {
     }
 }
 
-function* createData({data}) {
+function* createData({ data }) {
     const url = `${mainUrl}/create`
     try {
         const data = yield call(postData, url, data);
@@ -39,17 +39,17 @@ function* createData({data}) {
     }
 }
 
-function* updateData({id,data}) {
+function* updateData({ id, data }) {
     const url = `${mainUrl}/${id}/update`
     try {
-        const data = yield call(postData, url,data);
+        const data = yield call(postData, url, data);
         yield put(setBreedDetail(data));
     } catch (error) {
         yield put(setError(error.message));
     }
 }
 
-function* deleteData({id}) {
+function* deleteData({ id }) {
     const url = `${mainUrl}/${id}/delete`
     try {
         const data = yield call(get, url);

@@ -7,12 +7,12 @@ import CssBaseline from '@mui/material/CssBaseline';
 import { CacheProvider } from '@emotion/react';
 import createEmotionCache from '../src/createEmotionCache';
 import { SidebarProvider } from '../src/contexts/SidebarContext';
-import AdapterDateFns from '@mui/lab/AdapterDateFns';
-import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 import { persistStore } from 'redux-persist';
 import { store, persistor } from '../src/redux/store'
+import { LocalizationProvider } from '@mui/x-date-pickers';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 
 const clientSideEmotionCache = createEmotionCache();
 
@@ -37,7 +37,7 @@ function TokyoApp(props) {
           </Head>
           <SidebarProvider>
             <ThemeProvider>
-              <LocalizationProvider dateAdapter={AdapterDateFns}>
+              <LocalizationProvider dateAdapter={AdapterDayjs}>
                 <CssBaseline />
                 {getLayout(<Component {...pageProps} />)}
               </LocalizationProvider>

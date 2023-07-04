@@ -9,30 +9,25 @@ import { connect } from 'react-redux';
 import { getBreedList } from '../src/redux/action/breed';
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-
-import AuthComponent from 'src/components/AuthComponent';
-
+import { useRouter } from 'next/router';
 
 const Pet = ({ breed, auth }) => {
-    console.log(auth)
     const dispatch = useDispatch();
+    const router = useRouter();
 
     useEffect(() => {
-        dispatch(getBreedList());
+        router.push('/order')
+        // dispatch(getBreedList());
     }, []);
 
-    if (auth.token == null) {
-        return false
-    }
+    return(<></>)
+
     return (
         <>
             <Head>
                 <title>Pet</title>
             </Head>
-            <PageTitleWrapper>
-                <h1>Pet Page</h1>
-            </PageTitleWrapper>
-            <Container maxWidth={false} m={1}>
+            <Container maxWidth={false} sx={{ p: 6 }}>
                 <Grid container spacing={2} >
                     <Grid item md={6}>
                         <TableComponent

@@ -7,10 +7,11 @@ function* login({ payload }) {
     const url = `/admin/login`
     try {
         const { data } = yield call(postData, url, payload);
-        Cookies.set('token', data.token, { sameSite: 'strict' });
+        // Cookies.set('token', data.token, { sameSite: 'strict' });
         yield put(setAuth(data));
+        yield put(setError({}));
     } catch (error) {
-        yield put(setError(error.message));
+        yield put(setError(error));
     }
 }
 
@@ -18,8 +19,9 @@ function* logout() {
     try {
         const data = { user: null, token: null, intendedPath: '/' };
         yield put(setAuth(data));
+        yield put(setError({}));
     } catch (error) {
-        yield put(setError(error.message));
+        yield put(setError(error));
     }
 }
 

@@ -18,6 +18,7 @@ const LoginPage = () => {
     const dispatch = useDispatch();
     const router = useRouter();
     const auth = useSelector((state) => state.auth)
+    const error = useSelector((state) => state.error)
     const { token } = auth
 
     useEffect(() => {
@@ -99,6 +100,9 @@ const LoginPage = () => {
                                     name="email"
                                     autoComplete="email"
                                     autoFocus
+                                    error={error?.message?.email != null}
+                                    helperText={error?.message?.email}
+
                                 />
                                 <TextField
                                     margin="normal"
@@ -109,6 +113,8 @@ const LoginPage = () => {
                                     type="password"
                                     id="password"
                                     autoComplete="current-password"
+                                    error={error?.message?.password != null}
+                                    helperText={error?.message?.password}
                                 />
                                 <FormControlLabel
                                     control={<Checkbox value="remember" color="primary" />}

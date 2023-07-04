@@ -6,21 +6,22 @@ import Header from './Header';
 import { useRouter } from 'next/router';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
-import { setIntendedPath } from '../../redux/action/auth';
+import { setIntendedPath, logout } from '../../redux/action/auth';
 
 const SidebarLayout = ({ children }) => {
   const theme = useTheme();
   const dispatch = useDispatch();
   const router = useRouter();
   const auth = useSelector((state) => state.auth)
-  const { token } = auth;
+  const error = useSelector((state) => state.error)
 
   useEffect(() => {
-    if (!auth.token) {
+    if (!auth.token || error.errCode == 401) {
       dispatch(setIntendedPath(router.asPath));
+      dispatch(logout());
       router.replace('/login');
     }
-  }, [token]);
+  }, [auth.token,error.errCode]);
 
   if (auth.token == null) {
     return (<></>)

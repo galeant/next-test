@@ -22,7 +22,7 @@ export const deleteAuth = () => ({
 });
 
 
-export const setError = (message) => ({
+export const setError = (error) => ({
     type: 'SET_ERROR',
-    message
+    error
 });

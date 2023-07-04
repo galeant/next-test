@@ -1,40 +1,73 @@
+import { select } from 'redux-saga/effects';
 import axios from 'axios';
 
 axios.defaults.baseURL = 'http://api-pristine-revamp.local';
 
-const getData = async (url) => {
+function* getData(url) {
+    const token = yield select((state) => state.auth.token);
+    const headers = {
+        Authorization: `Bearer ${token}`
+    };
     try {
-        const res = await axios.get(url);
+        const res = yield axios.get(url, { headers });
         return res.data;
     } catch (error) {
-        return error;
+        const { status, data } = error.response;
+        throw {
+            errCode: status,
+            message: data.message
+        };
     }
 }
 
-const postData = async (url, data) => {
+function* postData(url, data) {
+    const token = yield select((state) => state.auth.token);
+    const headers = {
+        Authorization: `Bearer ${token}`
+    };
     try {
-        const res = await axios.post(url, data);
+        const res = yield axios.post(url, data, { headers });
         return res.data;
     } catch (error) {
-        return error;
+        const { status, data } = error.response;
+        throw {
+            errCode: status,
+            message: data.message
+        };
     }
 }
 
-const postDataForm = async (url, data) => {
+function* postDataForm(url, data) {
+    const token = yield select((state) => state.auth.token);
+    const headers = {
+        Authorization: `Bearer ${token}`
+    };
     try {
-        const res = await axios.post(url, data);
+        const res = yield axios.post(url, data, { headers });
         return res.data;
     } catch (error) {
-        return error;
+        const { status, data } = error.response;
+        throw {
+            errCode: status,
+            message: data.message
+        };
     }
 }
 
-const deleteData = async (url) => {
+function* deleteData(url) {
+    const token = yield select((state) => state.auth.token);
+    const headers = {
+        Authorization: `Bearer ${token}`
+    };
     try {
-        const res = await axios.delete(url);
+        const res = yield axios.delete(url, { headers });
         return res.data;
     } catch (error) {
-        return error;
+        const { status, data } = error.response;
+        throw {
+            errCode: status,
+            message: data.message
+        };
     }
 }
 
