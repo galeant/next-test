@@ -14,7 +14,7 @@ export const getOrderDetail = (id) => ({
 });
 
 export const setOrderDetail = (data) => ({
-    type: 'SET_BREED_DETAIL',
+    type: 'SET_ORDER_DETAIL',
     data
 })
 

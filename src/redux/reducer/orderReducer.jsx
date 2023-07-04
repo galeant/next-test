@@ -1,5 +1,6 @@
 
 const initialState = {
+    isLoading: true,
     dataList: [],
     detail: {},
     dataInput: {},
@@ -22,19 +23,20 @@ const breedReducer = (state = initialState, { type, data, id }) => {
                     currentPage: data.meta.current_page,
                     lastPage: data.meta.last_page,
                     total: data.meta.total
-                }
+                },
+                isLoading: false,
             }
             return { ...state, ...res };
-        case 'GET_BREED_DETAIL':
-            return { ...state, list: action.data };
-        case 'SET_BREED_DETAIL':
-            return { ...state, detail: action.detail };
+        case 'SET_ORDER_DETAIL':
+            return { ...state, detail: data.data, isLoading: false };
         case 'POST_BREED':
             return { ...state, input: action.data };
         case 'UPDATE_BREED':
             return { ...state, detail: action.detail, input: action.data };
         case 'DELETE_BREED':
             return { ...state, detail: action.detail };
+        case 'SET_LOADING':
+            return { ...state, isLoadng: true };
         default:
             return state;
     }

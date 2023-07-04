@@ -1,6 +1,6 @@
 import { Chip, Link } from "@mui/material";
-import { format, parseISO } from "date-fns";
 import { orderStatus, langPreference } from "src/enums";
+import dayjs from "dayjs";
 
 
 const orderTableConfig = [{
@@ -42,9 +42,8 @@ const orderTableConfig = [{
 }, {
     label: 'Order Date',
     toDisplay: (row) => {
-        const parsedDate = parseISO(row.created_at);
-        const date = format(parsedDate, 'eee, dd-MM-yyyy');
-        return date
+        const parsedDate = dayjs(row.created_at).format('dddd, DD-MM-YYYY');
+        return parsedDate;
     }
 }, {
     label: 'Lang Preference',
