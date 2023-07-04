@@ -1,6 +1,5 @@
 import Head from 'next/head';
 import SidebarLayout from 'src/layouts/SidebarLayout';
-import PageTitleWrapper from 'src/components/PageTitleWrapper';
 import { Grid, Container, TextField, InputAdornment, InputLabel, Select, MenuItem } from '@mui/material';
 import Footer from 'src/components/Footer';
 import TableComponent from 'src/components/TableComponent'
@@ -9,14 +8,13 @@ import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import RefreshIcon from '@mui/icons-material/Refresh';
 
 import { useSelector } from 'react-redux';
-import { getOrderList } from '../src/redux/action/order';
+import { getOrderList } from 'src/redux/action/order';
 import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import orderTableConfig from '../src/tableConfig/orderTable'
+import orderTableConfig from 'src/tableConfig/orderTable'
 import { useRouter } from 'next/router';
-import { orderStatus } from '../src/enums'
+import { orderStatus } from 'src/enums'
 import dayjs from 'dayjs';
-import { fi } from 'date-fns/locale';
 
 const Search = ({ search, setSearch, searchDate,  searchStatus,  searchFieldHandler, searchDateFieldHandler, searchStatusFieldHandler }) => {
     return (
