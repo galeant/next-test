@@ -32,6 +32,18 @@ export const DashboardMenu = [
 	},
 	{
 		id: uuid(),
+		title: 'Order',
+		icon: 'shopping-bag',
+		link: '/order'
+	},
+	{
+		id: uuid(),
+		title: 'Promo',
+		icon: 'gift',
+		link: '/'
+	},
+	{
+		id: uuid(),
 		title: 'LAYOUTS & PAGES',
 		grouptitle: true
 	},
@@ -41,12 +53,12 @@ export const DashboardMenu = [
 		icon: 'layers',
 		children: [
 			{ id: uuid(), link: '/pages/profile', name: 'Profile' },
-			{ id: uuid(), link: '/pages/settings', name: 'Settings'},
+			{ id: uuid(), link: '/pages/settings', name: 'Settings' },
 			{ id: uuid(), link: '/pages/billing', name: 'Billing' },
-			{ id: uuid(), link: '/pages/pricing', name: 'Pricing'},
+			{ id: uuid(), link: '/pages/pricing', name: 'Pricing' },
 			{ id: uuid(), link: '/404', name: '404 Error' }
 		]
-	},	
+	},
 	{
 		id: uuid(),
 		title: 'Authentication',
@@ -54,7 +66,7 @@ export const DashboardMenu = [
 		children: [
 			{ id: uuid(), link: '/authentication/sign-in', name: 'Sign In' },
 			{ id: uuid(), link: '/authentication/sign-up', name: 'Sign Up' },
-			{ id: uuid(), link: '/authentication/forget-password', name: 'Forget Password'}			
+			{ id: uuid(), link: '/authentication/forget-password', name: 'Forget Password' }
 		]
 	},
 	{
@@ -62,12 +74,12 @@ export const DashboardMenu = [
 		title: 'Layouts',
 		icon: 'layout',
 		link: '/layouts/layout-vertical'
-	},	
+	},
 	{
 		id: uuid(),
 		title: 'UI COMPONENTS',
 		grouptitle: true
-	},	
+	},
 	{
 		id: uuid(),
 		title: 'Components',
@@ -98,40 +110,40 @@ export const DashboardMenu = [
 			{ id: uuid(), link: '/components/toasts', name: 'Toasts' },
 			{ id: uuid(), link: '/components/tooltips', name: 'Tooltips' }
 		]
-	},	
+	},
 	{
 		id: uuid(),
 		title: 'Menu Level',
 		icon: 'corner-left-down',
 		children: [
-			{ 
-				id: uuid(), 
-				link: '#', 
+			{
+				id: uuid(),
+				link: '#',
 				title: 'Two Level',
 				children: [
-					{ id: uuid(), link: '#', name: 'NavItem 1'},
+					{ id: uuid(), link: '#', name: 'NavItem 1' },
 					{ id: uuid(), link: '#', name: 'NavItem 2' }
 				]
 			},
-			{ 
-				id: uuid(), 
-				link: '#', 
+			{
+				id: uuid(),
+				link: '#',
 				title: 'Three Level',
 				children: [
-					{ 
-						id: uuid(), 
-						link: '#', 
+					{
+						id: uuid(),
+						link: '#',
 						title: 'NavItem 1',
 						children: [
-							{ id: uuid(), link: '#', name: 'NavChildItem 1'},
-							{ id: uuid(), link: '#', name: 'NavChildItem 2'}
+							{ id: uuid(), link: '#', name: 'NavChildItem 1' },
+							{ id: uuid(), link: '#', name: 'NavChildItem 2' }
 						]
 					},
 					{ id: uuid(), link: '#', name: 'NavItem 2' }
 				]
 			}
 		]
-	},	
+	},
 	{
 		id: uuid(),
 		title: 'Documentation',

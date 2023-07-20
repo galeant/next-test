@@ -18,7 +18,7 @@ import SimpleBar from 'simplebar-react';
 import 'simplebar/dist/simplebar.min.css';
 
 // import routes file
-import { DashboardMenu } from 'routes/DashboardRoutes';
+import { DashboardMenu } from 'routes/DashboardRoute';
 
 const NavbarVertical = (props) => {
 	const location = useRouter();
@@ -138,8 +138,8 @@ const NavbarVertical = (props) => {
 																		{menuLevel1Item.title}
 																		{menuLevel1Item.badge ? (
 																			<Badge className="ms-1" bg={
-																					menuLevel1Item.badgecolor ? menuLevel1Item.badgecolor : 'primary'
-																				}>
+																				menuLevel1Item.badgecolor ? menuLevel1Item.badgecolor : 'primary'
+																			}>
 																				{menuLevel1Item.badge}
 																			</Badge>
 																		) : ('')}
@@ -147,7 +147,7 @@ const NavbarVertical = (props) => {
 																	<Accordion.Collapse eventKey={0} bsPrefix="nav-item">
 																		<ListGroup as="ul" bsPrefix="" className="nav flex-column">
 																			{/* second level menu started  */}
-																			{menuLevel1Item.children.map(function (menuLevel2Item,menuLevel2Index) {
+																			{menuLevel1Item.children.map(function (menuLevel2Item, menuLevel2Index) {
 																				if (menuLevel2Item.children) {
 																					return (
 																						<ListGroup.Item as="li" bsPrefix="nav-item" key={menuLevel2Index}>
@@ -157,8 +157,8 @@ const NavbarVertical = (props) => {
 																									{menuLevel2Item.title}
 																									{menuLevel2Item.badge ? (
 																										<Badge className="ms-1" bg={
-																												menuLevel2Item.badgecolor ? menuLevel2Item.badgecolor : 'primary'
-																											}>
+																											menuLevel2Item.badgecolor ? menuLevel2Item.badgecolor : 'primary'
+																										}>
 																											{menuLevel2Item.badge}
 																										</Badge>
 																									) : ('')}
@@ -166,7 +166,7 @@ const NavbarVertical = (props) => {
 																								<Accordion.Collapse eventKey={0} bsPrefix="nav-item">
 																									<ListGroup as="ul" bsPrefix="" className="nav flex-column">
 																										{/* third level menu started  */}
-																										{menuLevel2Item.children.map(function (menuLevel3Item,menuLevel3Index) {
+																										{menuLevel2Item.children.map(function (menuLevel3Item, menuLevel3Index) {
 																											return (
 																												<ListGroup.Item key={menuLevel3Index} as="li" bsPrefix="nav-item">
 																													{generateLink(menuLevel3Item)}
@@ -187,7 +187,7 @@ const NavbarVertical = (props) => {
 																						</ListGroup.Item>
 																					);
 																				}
-																				
+
 																			})}
 																			{/* end of second level menu  */}
 																		</ListGroup>
@@ -234,7 +234,7 @@ const NavbarVertical = (props) => {
 					})}
 				</Accordion>
 				{/* end of Dashboard Menu */}
-				
+
 			</SimpleBar>
 		</Fragment>
 	);
