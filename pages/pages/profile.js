@@ -18,7 +18,7 @@ const Profile = () => {
   return (
     <Container fluid className="p-6">
       {/* Page Heading */}
-      <PageHeading heading="Overview"/>
+      <PageHeading heading="Overview" />
 
       {/* Profile Header  */}
       <ProfileHeader />

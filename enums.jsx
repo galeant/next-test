@@ -2,7 +2,17 @@
 // import HourglassEmptyIcon from '@mui/icons-material/HourglassEmpty';
 // import { DiAndroid } from "react-icons/di";
 
-const orderStatus = (value = null) => {
+const orderStatus = (value = null, all = false) => {
+    if (!value) {
+        return {
+            icon: () => {
+                return ''
+            },
+            color: '',
+            string: ''
+        }
+    }
+
     const attr = {
         1: {
             icon: () => {
@@ -23,13 +33,15 @@ const orderStatus = (value = null) => {
             string: 'Delivered'
         }
     };
-    if (value !== null) {
-        return attr[value];
+
+    if (all) {
+        return Object.keys(attr).map(key => ({
+            key,
+            ...attr[key]
+        }));
     }
-    return Object.keys(attr).map(key => ({
-        key,
-        ...attr[key]
-    }));
+    return attr[value];
+
 }
 
 
@@ -49,6 +61,11 @@ const langPreference = (value) => {
             return {
                 src: '/flag/jp.webp',
                 string: 'Japan'
+            }
+        default:
+            return {
+                src: '',
+                string: ''
             }
     }
 }
