@@ -51,7 +51,7 @@ const Search = ({ search, setSearch, searchDate, searchStatus, searchFieldHandle
                     >
                         <option value=''>--Select Status--</option>
                         {
-                            orderStatus().map((v) => {
+                            orderStatus(null, true).map((v) => {
                                 return <option key={v.key} value={v.key}>{v.string}</option>
                             })
                         }

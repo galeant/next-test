@@ -3,16 +3,6 @@
 // import { DiAndroid } from "react-icons/di";
 
 const orderStatus = (value = null, all = false) => {
-    if (!value) {
-        return {
-            icon: () => {
-                return ''
-            },
-            color: '',
-            string: ''
-        }
-    }
-
     const attr = {
         1: {
             icon: () => {
@@ -33,12 +23,21 @@ const orderStatus = (value = null, all = false) => {
             string: 'Delivered'
         }
     };
-
     if (all) {
         return Object.keys(attr).map(key => ({
             key,
             ...attr[key]
         }));
+    }
+
+    if (!value) {
+        return {
+            icon: () => {
+                return ''
+            },
+            color: '',
+            string: ''
+        }
     }
     return attr[value];
 
