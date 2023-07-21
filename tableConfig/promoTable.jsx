@@ -1,15 +1,18 @@
-import { Button, ButtonGroup, Chip, IconButton, Link, Tooltip } from "@mui/material";
 import dayjs from "dayjs";
-import { promoStatus } from "src/enums";
+import { Badge, Button, ButtonGroup } from "react-bootstrap";
+import { promoStatus } from "enums";
 
 const promoTableConfig = [{
     label: 'Action',
     toDisplay: (row, editAction, deleteAction) => {
+        // const editUrl = `promo/${row.id}/detail`
         return (
-            <ButtonGroup>
-                <Button size="small" variant="contained" color="warning" onClick={editAction}>Edit</Button>
-                <Button size="small" variant="contained" color="error" onClick={() => deleteAction(row.id)}>Delete</Button>
+            <ButtonGroup size="sm">
+                {/* <a href={editUrl} className="btn btn-success" target="_blank">Edit</a> */}
+                <Button variant="success" onClick={editAction}>Edit</Button>
+                <Button variant="danger" onClick={() => deleteAction(row.id)}>Delete</Button>
             </ButtonGroup>
+
         )
     }
 }, {
@@ -21,7 +24,7 @@ const promoTableConfig = [{
 }, {
     label: 'Code',
     toDisplay: (row) => {
-        return <h3>{row.voucher_code}</h3>
+        return <h4>{row.voucher_code}</h4>
     }
 }, {
     label: 'Max Redeem',
@@ -37,7 +40,7 @@ const promoTableConfig = [{
     label: 'status',
     toDisplay: (row) => {
         const { color, string } = promoStatus(row.status);
-        return <Chip color={color} label={string} />
+        return <Badge pill bg={color} className="p-2">{string}</Badge>
     }
 }, {
     label: 'Start Date',

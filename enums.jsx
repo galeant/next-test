@@ -72,17 +72,17 @@ const langPreference = (value) => {
 const promoStatus = (value = null) => {
     const attr = {
         'publish': {
-            icon: <HourglassEmptyIcon />,
+            icon: <></>,
             color: 'success',
             string: 'Publish'
         },
         'unpublish': {
-            icon: <DeliveryDiningIcon />,
-            color: 'error',
+            icon: <></>,
+            color: 'danger',
             string: 'UnPublish'
         },
         'draft': {
-            icon: <DeliveryDiningIcon />,
+            icon: <></>,
             color: 'warning',
             string: 'Draft'
         }

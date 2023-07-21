@@ -1,6 +1,7 @@
 import { takeEvery, select, takeLatest, put, call } from 'redux-saga/effects';
 import { getPromoList, setPromoList, setPromoDetail, setError } from '../action/promo'
 import { getCall, postDataCall, deleteCall } from 'apiCall'
+import { setLoading } from 'redux/action/general';
 
 const mainUrl = '/admin/promo'
 
@@ -9,6 +10,7 @@ function* getListData({ queryParams }) {
     try {
         const data = yield call(getCall, mainUrl);
         yield put(setPromoList(data));
+        yield put(setLoading(false))
     } catch (error) {
         yield put(setError(error));
     }

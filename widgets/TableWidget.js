@@ -1,6 +1,6 @@
 import Loading from "pages/components/loading";
 import { useEffect, useState } from "react";
-import { Card, Col, Container, Pagination, Row, Spinner, Table } from "react-bootstrap";
+import { Button, Card, Col, Container, Modal, Pagination, Row, Spinner, Table } from "react-bootstrap";
 import { useSelector } from "react-redux";
 
 const TableRow = ({ config, row, editAction, deleteAction }) => {
@@ -32,7 +32,6 @@ const TableBody = ({ config, tableData, editAction, deleteAction }) => {
             <tr><td colSpan={config.length} className="text-center">No Data</td></tr>
         )
     }
-
     return (
         tableData.map((value, key) => {
             return (
@@ -42,7 +41,7 @@ const TableBody = ({ config, tableData, editAction, deleteAction }) => {
                     // withAction={props.withAction}
                     row={value}
                     editAction={() => editAction(value.id)}
-                    deleteAction={() => handleDialogOpen(value.id)}
+                    deleteAction={() => deleteAction(value.id)}
                 />
             )
         })
@@ -89,12 +88,52 @@ const TablePagination = ({ page, tableData, pagination, handlePageChange }) => {
     )
 }
 
+const DeletConfirmation = ({ open, handleDialogClose, handleDialogSubmit }) => {
+    return (
+        <Modal show={open} onHide={handleDialogClose}>
+            <Modal.Body> Are you sure want to delete this data?</Modal.Body>
+            <Modal.Footer>
+                <Button variant="secondary" onClick={handleDialogClose}>
+                    No
+                </Button>
+                <Button variant="primary" onClick={handleDialogSubmit}>
+                    Yes
+                </Button>
+            </Modal.Footer>
+        </Modal>
+    )
+}
+
+
 const TableWidget = ({ ...props }) => {
     const [page, setPage] = useState(props.pagination.currentPage ?? 1);
+    const [open, setOpen] = useState(false);
+    const [dataId, setDataId] = useState(null)
+
+    useEffect(() => {
+        setPage(props.pagination.currentPage);
+    }, [props.pagination.currentPage])
+
     const handlePageChange = (newPage) => {
         props.paginationHandler(newPage, 'page');
         setPage(newPage);
     };
+
+    const handleDialogOpen = (id) => {
+        setOpen(true);
+        setDataId(id)
+    };
+    const handleDialogClose = () => {
+        setOpen(false);
+        setDataId(null)
+    };
+
+    const handleDialogSubmit = () => {
+        props.deleteAction(dataId)
+        setOpen(false);
+        setDataId(null)
+    };
+
     return (
         <>
             <Card>
@@ -118,8 +157,8 @@ const TableWidget = ({ ...props }) => {
                                 config={props.tableConfig}
                                 // withAction={props.withAction}
                                 tableData={props.tableData}
-                                editAction={() => props.editAction(value.id)}
-                                deleteAction={() => handleDialogOpen(value.id)}
+                                editAction={props.editAction}
+                                deleteAction={handleDialogOpen}
                             ></TableBody>
                         </tbody>
                     </Table>
@@ -132,7 +171,12 @@ const TableWidget = ({ ...props }) => {
 
                 </Card.Body >
             </Card >
-
+            <DeletConfirmation
+                open={open}
+                handleDialogOpen={handleDialogOpen}
+                handleDialogClose={handleDialogClose}
+                handleDialogSubmit={handleDialogSubmit}
+            />
         </>
     );
 };
