@@ -18,6 +18,12 @@ export const setPromoDetail = (data) => ({
     data
 })
 
+export const postPromo = (submitData,id) => ({
+    type: 'POST_PROMO',
+    id,
+    submitData
+})
+
 export const deletePromo = ({ id, queryParams }) => ({
     type: 'DELETE_PROMO',
     id, queryParams

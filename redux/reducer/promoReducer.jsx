@@ -1,23 +1,27 @@
+import dayjs from "dayjs";
+
+const defaultDetailState = {
+    id: null,
+    title: null,
+    start_date: dayjs().toDate(),
+    end_date: dayjs().toDate(),
+    voucher_code: null,
+    promo_thumbnail: null,
+    promo_image: null,
+    terms_cond: null,
+    galon: 0,
+    refill_galon: 0,
+    lima_belas_lt: 0,
+    enam_ratus_ml: 0,
+    empat_ratus_ml: 0,
+    status: '',
+    max_redeem: null,   
+}
+
 const initialState = {
     isLoading: true,
     dataList: [],
-    detail: {
-        id: null,
-        title: null,
-        start_date: null,
-        end_date: null,
-        voucher_code: null,
-        promo_thumbnail: null,
-        promo_image: null,
-        terms_cond: null,
-        galon: null,
-        refill_galon: null,
-        lima_belas_lt: null,
-        enam_ratus_ml: null,
-        empat_ratus_ml: null,
-        status: '',
-        max_redeem: null,
-    },
+    detail: defaultDetailState,
     dataInput: {},
     pagination: {
         perPage: 0,
@@ -44,13 +48,15 @@ const promoReducer = (state = initialState, { type, data, id, message }) => {
         // case 'GET_PROMO_DETAIL':
         //     return { ...state, list: action.data };
         case 'SET_PROMO_DETAIL':
-            return { ...state, detail: data.data, isLoading: false };
-        case 'POST_PROMO':
-            return { ...state, input: action.data };
+            let detailData = data.data;
+            detailData.start_date = dayjs(detailData.start_date).toDate()
+            detailData.end_date = dayjs(detailData.end_date).toDate()
+            return { ...state, detail: detailData, isLoading: false };
+
+        case 'SET_DEFAULT_DETAIL':
+            return { ...state, detail: defaultDetailState};
         case 'UPDATE_PROMO':
             return { ...state, detail: action.detail, input: action.data };
-        // case 'DELETE_PROMO':
-        //     return { ...state, detail: action.detail };
         default:
             return state;
     }

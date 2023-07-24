@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import { Card, Col, Container, Form, Row, Table } from "react-bootstrap";
+import { Button, Card, Col, Container, Form, Row, Table } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { getPromoList, deletePromo } from "redux/action/promo";
 import { PageHeading } from "widgets";
@@ -14,8 +14,8 @@ import { setLoading } from "redux/action/general";
 const Search = ({ search, setSearch, searchDate, searchStatus, searchFieldHandler, searchDateFieldHandler, searchStatusFieldHandler }) => {
     return (
         <Row>
-            <Col md={3}>
-                <Form.Group className="mb-3">
+            <Col md={3} className="mb-3">
+                <Form.Group>
                     <Form.Label>Search</Form.Label>
                     <Form.Control
                         type="text"
@@ -25,44 +25,18 @@ const Search = ({ search, setSearch, searchDate, searchStatus, searchFieldHandle
                     />
                 </Form.Group>
             </Col>
-            <Col md={3}>
-                <Form.Group className="mb-3">
-                    <Form.Label>Date</Form.Label>
-                    <Row>
-                        <Col md={12}>
-                            <DatePicker
-                                // style={{ width: "100%" }}
-                                className="form-control"
-                                selected={searchDate}
-                                dateFormat="dd-MM-yyyy"
-                                onChange={searchDateFieldHandler}
-                            />
-                        </Col>
-                    </Row>
-
-                </Form.Group>
-            </Col>
-            <Col md={3}>
-                <Form.Group className="mb-3">
-                    <Form.Label>Status</Form.Label>
-                    <Form.Select aria-label="Default select example"
-                        value={searchStatus}
-                        onChange={searchStatusFieldHandler}
-                    >
-                        <option value=''>--Select Status--</option>
-                        {
-                            orderStatus(null, true).map((v) => {
-                                return <option key={v.key} value={v.key}>{v.string}</option>
-                            })
-                        }
-                    </Form.Select>
-                </Form.Group>
+            <Col md={3} className="d-flex mb-3">
+                <a
+                    variant="success" 
+                    className="btn btn-success align-self-end"
+                    href="/promo/create"
+                ><i className="fe fe-plus-square"></i> Create</a>
             </Col>
         </Row>
     )
 }
 
-const OrderListPage = () => {
+const PromoListPage = () => {
 
     const router = useRouter();
     const dispatch = useDispatch();
@@ -75,6 +49,7 @@ const OrderListPage = () => {
     useEffect(() => {
         dispatch(setLoading(true))
         if (isReady) {
+            console.log(query)
             dispatch(getPromoList(query))
             const { search, date, status } = query;
             setSearch(search ?? '')
@@ -137,7 +112,7 @@ const OrderListPage = () => {
                 editAction={editAction}
                 deleteAction={deleteAction}
             >
-                {/* <Search
+                <Search
                     search={search}
                     setSearch={setSearch}
                     searchDate={searchDate}
@@ -147,9 +122,9 @@ const OrderListPage = () => {
                     searchFieldHandler={searchFieldHandler}
                     searchDateFieldHandler={searchDateFieldHandler}
                     searchStatusFieldHandler={searchStatusFieldHandler}
-                ></Search> */}
+                ></Search>
             </TableWidget>
         </Container>
     )
 }
-export default OrderListPage;
+export default PromoListPage;

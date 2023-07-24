@@ -11,6 +11,7 @@ import { PersistGate } from 'redux-persist/integration/react';
 // import theme style scss file
 import 'styles/theme.scss';
 import "react-datepicker/dist/react-datepicker.css";
+import 'styles/custom.css';
 
 // import default layouts
 import DefaultDashboardLayout from 'layouts/DefaultDashboardLayout';

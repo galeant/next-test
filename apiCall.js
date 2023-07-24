@@ -4,6 +4,7 @@ import axios from 'axios';
 axios.defaults.baseURL = 'http://api-pristine-revamp.local';
 
 function* getCall(url) {
+    console.log(url)
     const token = yield select((state) => state.auth.token);
     const headers = {
         Authorization: `Bearer ${token}`
@@ -40,10 +41,12 @@ function* postDataCall(url, data) {
 function* postDataFormCall(url, data) {
     const token = yield select((state) => state.auth.token);
     const headers = {
-        Authorization: `Bearer ${token}`
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "multipart/form-data"
     };
     try {
         const res = yield axios.post(url, data, { headers });
+        console.log(res)
         return res.data;
     } catch (error) {
         const { status, data } = error.response;
