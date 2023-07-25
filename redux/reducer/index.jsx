@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux';
-import breed from './breedReducer'
 import auth from './authReducer'
 import order from './orderReducer'
 import promo from './promoReducer'
+import article from './articleReducer';
 
 const generalState = {
   message: null,
@@ -22,11 +22,11 @@ const general = (state = generalState, { type, error, isLoading }) => {
 }
 
 const rootReducer = combineReducers({
-  breed,
   auth,
   order,
   promo,
   general,
+  article,
 });
 
 export default rootReducer;

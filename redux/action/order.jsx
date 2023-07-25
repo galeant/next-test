@@ -17,8 +17,3 @@ export const setOrderDetail = (data) => ({
     type: 'SET_ORDER_DETAIL',
     data
 })
-
-export const setError = (error) => ({
-    type: 'SET_ERROR',
-    error
-});

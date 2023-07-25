@@ -2,20 +2,27 @@ import dayjs from "dayjs";
 
 const defaultDetailState = {
     id: null,
-    title: null,
-    start_date: dayjs().toDate(),
-    end_date: dayjs().toDate(),
-    voucher_code: null,
-    promo_thumbnail: null,
-    promo_image: null,
-    terms_cond: null,
-    galon: 0,
-    refill_galon: 0,
-    lima_belas_lt: 0,
-    enam_ratus_ml: 0,
-    empat_ratus_ml: 0,
-    status: '',
-    max_redeem: null,   
+    title: {
+        id:null,
+        en:null,
+        jp:null,
+    },
+    content:{
+        id:null,
+        en:null,
+        jp:null,
+    },
+    slug:{
+        id:null,
+        en:null,
+        jp:null,
+    },
+    status:null,
+    published_at:dayjs().toDate(),
+    meta_title:null,
+    meta_keyword:[],
+    meta_description:null,
+    banner:null,
 }
 
 const initialState = {
@@ -31,9 +38,9 @@ const initialState = {
     },
 };
 
-const promoReducer = (state = initialState, { type, data, id, message }) => {
+const articleReducer = (state = initialState, { type, data, id, message }) => {
     switch (type) {
-        case 'SET_PROMO_LIST':
+        case 'SET_ARTICLE_LIST':
             return {
                 ...state,
                 dataList: data.data,
@@ -45,18 +52,18 @@ const promoReducer = (state = initialState, { type, data, id, message }) => {
                     total: data.meta.total
                 }
             };
-            
-        case 'SET_PROMO_DETAIL':
+
+        case 'SET_ARTICLE_DETAIL':
             let detailData = data.data;
-            detailData.start_date = dayjs(detailData.start_date).toDate()
-            detailData.end_date = dayjs(detailData.end_date).toDate()
+            detailData.published_at = dayjs(detailData.published_at).toDate()
             return { ...state, detail: detailData, isLoading: false };
 
         case 'SET_DEFAULT_DETAIL':
             return { ...state, detail: defaultDetailState};
+            
         default:
             return state;
     }
 };
 
-export default promoReducer;
+export default articleReducer;

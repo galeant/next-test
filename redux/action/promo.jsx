@@ -28,8 +28,3 @@ export const deletePromo = ({ id, queryParams }) => ({
     type: 'DELETE_PROMO',
     id, queryParams
 })
-
-export const setError = (error) => ({
-    type: 'SET_ERROR',
-    error
-});

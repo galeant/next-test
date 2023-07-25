@@ -44,29 +44,33 @@ const orderStatus = (value = null, all = false) => {
 }
 
 
-const langPreference = (value) => {
-    switch (value) {
-        case 'id':
-            return {
-                src: '/flag/id.webp',
-                string: 'Indonesia'
-            }
-        case 'en':
-            return {
-                src: '/flag/us.webp',
-                string: 'English'
-            }
-        case 'jp':
-            return {
-                src: '/flag/jp.webp',
-                string: 'Japan'
-            }
-        default:
-            return {
-                src: '',
-                string: ''
-            }
+const langPreference = (value = null) => {
+    const lang = {
+        'id':{
+            src: '/flag/id.webp',
+            string: 'Indonesia'
+        },
+        'en':{
+            src: '/flag/us.webp',
+            string: 'English'
+        },
+        'jp':{
+            src: '/flag/jp.webp',
+            string: 'Japan'   
+        }
     }
+    if (value !== null && attr[value] !== undefined) {
+        return attr[value];
+    }else if(attr[value] !== undefined){
+        return {
+            src:'',
+            string:''
+        }
+    }
+    return Object.keys(attr).map(key => ({
+        key,
+        ...attr[key]
+    }));
 }
 
 const promoStatus = (value = null) => {
@@ -96,8 +100,28 @@ const promoStatus = (value = null) => {
     }));
 }
 
+const articleStatus = (value = null) => {
+    const attr = [
+        {
+            icon: <></>,
+            color: 'warning',
+            string: 'Draft'
+        },
+        {
+            icon: <></>,
+            color: 'success',
+            string: 'Live'
+        }
+    ];
+    if (value !== null) {
+        return attr[value];
+    }
+    return attr;
+}
+
 export {
     orderStatus,
     langPreference,
     promoStatus,
+    articleStatus,
 }

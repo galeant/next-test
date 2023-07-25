@@ -2,11 +2,11 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { Button, Card, Col, Container, Form, Row, Table } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { getPromoList, deletePromo } from "redux/action/promo";
+import { deleteArticle, getArticleList } from "redux/action/article";
 import { PageHeading } from "widgets";
 import TableWidget from "widgets/TableWidget";
-import promoTableConfig from 'tableConfig/promoTable'
-import { orderStatus } from 'enums'
+import articleTableConfig from 'tableConfig/articleTable'
+import { articleStatus } from 'enums'
 import DatePicker from "react-datepicker";
 import dayjs from 'dayjs';
 import { setLoading } from "redux/action/general";
@@ -30,7 +30,7 @@ const Search = ({ search, setSearch, searchDate, searchStatus, searchFieldHandle
                 <Link
                     variant="success" 
                     className="btn btn-success align-self-end"
-                    href="/promo/create"
+                    href="/article/create"
                 ><i className="fe fe-plus-square"></i> Create</Link>
             </Col>
         </Row>
@@ -38,10 +38,9 @@ const Search = ({ search, setSearch, searchDate, searchStatus, searchFieldHandle
 }
 
 const PromoListPage = () => {
-
     const router = useRouter();
     const dispatch = useDispatch();
-    const promo = useSelector((state) => state.promo)
+    const article = useSelector((state) => state.article)
     const { query, isReady } = router;
     const [search, setSearch] = useState('');
     const [searchDate, setSearchDate] = useState(null);
@@ -50,15 +49,13 @@ const PromoListPage = () => {
     useEffect(() => {
         dispatch(setLoading(true))
         if (isReady) {
-            console.log(query)
-            dispatch(getPromoList(query))
+            dispatch(getArticleList(query))
             const { search, date, status } = query;
             setSearch(search ?? '')
             setSearchDate(date ? dayjs(date).toDate() : null)
             setSearchStatus(status ?? '')
         }
     }, [query])
-
     const searchFieldHandler = (value) => {
         searchHandler(value, 'search')
     }
@@ -91,11 +88,11 @@ const PromoListPage = () => {
 
     const editAction = (id) => {
         // window.open(`/promo/${id}/detail`, '_blank'); // New Table
-        router.push(`promo/${id}/detail`) // Redirect
+        router.push(`order/${id}/detail`) // Redirect
     }
 
     const deleteAction = (id) => {
-        dispatch(deletePromo({ id, queryParams: query }))
+        dispatch(deleteArticle({ id, queryParams: query }))
     }
 
 
@@ -103,11 +100,11 @@ const PromoListPage = () => {
 
         <Container fluid className="p-6">
             {/* Page Heading */}
-            <PageHeading heading="Promo" />
+            <PageHeading heading="Article" />
             <TableWidget
-                tableConfig={promoTableConfig}
-                tableData={promo.dataList}
-                pagination={promo.pagination}
+                tableConfig={articleTableConfig}
+                tableData={article.dataList}
+                pagination={article.pagination}
                 paginationHandler={searchHandler}
                 withAction={true}
                 editAction={editAction}

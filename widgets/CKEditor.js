@@ -37,7 +37,7 @@ const CKEditor = ({ onChange, editorLoaded, name, value }) => {
                             '|',
                             'link',
                             // 'insertTable',
-                            // 'imageUpload',
+                            'imageUpload',
                             // 'mediaEmbed',
                             '|',
                             'undo',

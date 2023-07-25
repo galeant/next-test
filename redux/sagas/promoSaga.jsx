@@ -83,11 +83,11 @@ function* postData({ id,submitData }) {
     }
 }
 
-function* orderSaga() {
+function* promoSaga() {
     yield takeEvery('GET_PROMO_LIST', getListData);
     yield takeEvery('GET_PROMO_DETAIL', getDetailData);
     yield takeEvery('DELETE_PROMO', deleteData);
     yield takeEvery('POST_PROMO', postData);
 }
 
-export default orderSaga;
+export default promoSaga;
