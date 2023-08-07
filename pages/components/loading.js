@@ -6,14 +6,13 @@ import { setLoading } from "redux/action/general";
 
 const Loading = (props) => {
     const dispatch = useDispatch();
-    const { isLoading } = useSelector((state) => state.general)
+    const { isLoading, errCode } = useSelector((state) => state.general)
     const { isReady } = useRouter();
 
     useEffect(() => {
         if (isReady) {
             dispatch(setLoading(false));
         }
-
     }, [isReady]);
 
     if (isLoading) {

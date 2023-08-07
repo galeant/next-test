@@ -18,7 +18,7 @@ export const setArticleDetail = (data) => ({
     data
 })
 
-export const postArticle = (submitData,id) => ({
+export const postArticle = (submitData, id) => ({
     type: 'POST_ARTICLE',
     id,
     submitData

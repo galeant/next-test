@@ -4,7 +4,6 @@ import axios from 'axios';
 axios.defaults.baseURL = 'http://api-pristine-revamp.local';
 
 function* getCall(url) {
-    console.log(url)
     const token = yield select((state) => state.auth.token);
     const headers = {
         Authorization: `Bearer ${token}`

@@ -1,5 +1,5 @@
 import Loading from "pages/components/loading";
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { Button, Card, Col, Container, Modal, Pagination, Row, Spinner, Table } from "react-bootstrap";
 import { useSelector } from "react-redux";
 

@@ -30,7 +30,7 @@ const PromoInputForm = (props) => {
 
 
     const onSubmit = (data) => {
-        dispatch(postPromo(data,props.id))
+        dispatch(postPromo(data, props.id))
         router.push('/promo')
     };
 
@@ -102,7 +102,6 @@ const PromoInputForm = (props) => {
                                                         />
                                                     )}
                                                 />
-
                                             </Col>
                                         </Row>
                                     </Form.Group>
@@ -248,10 +247,8 @@ const PromoInputForm = (props) => {
                                     <Button type="submit" className="btn btn-block" variant="success" size="lg">Save</Button>
                                 </Col>
                             </Row>
-
                         </Card.Body>
                     </Card>
-
                 </form>
             </Container >
         </Loading >

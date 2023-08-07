@@ -1,7 +1,7 @@
 import { takeEvery, select, takeLatest, put, call } from 'redux-saga/effects';
-import { setOrderList, setOrderDetail, setError } from '../action/order'
+import { setOrderList, setOrderDetail } from '../action/order'
 import { getCall, postDataCall } from 'apiCall'
-import { setLoading } from 'redux/action/general';
+import { setLoading, setError } from 'redux/action/general';
 
 const mainUrl = '/admin/order'
 

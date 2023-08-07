@@ -10,6 +10,7 @@ import { orderStatus } from 'enums'
 import DatePicker from "react-datepicker";
 import dayjs from 'dayjs';
 import { setLoading } from "redux/action/general";
+import Loading from "pages/components/loading";
 
 const Search = ({ search, setSearch, searchDate, searchStatus, searchFieldHandler, searchDateFieldHandler, searchStatusFieldHandler }) => {
     return (
@@ -114,7 +115,6 @@ const OrderListPage = () => {
     }
 
     return (
-
         <Container fluid className="p-6">
             {/* Page Heading */}
             <PageHeading heading="Order" />

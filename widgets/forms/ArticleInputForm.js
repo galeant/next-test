@@ -1,13 +1,14 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
-import {  articleStatus } from "enums";
+import { articleStatus } from "enums";
 import { Badge, Button, Card, Col, Container, Form, Image, Row, Table } from "react-bootstrap";
 import Loading from 'pages/components/loading';
 import DatePicker from "react-datepicker";
 import CKEditor from "widgets/CKEditor";
 import { Controller, useForm } from 'react-hook-form'
 import { postArticle } from 'redux/action/article';
+import Tiptap from 'widgets/Tiptap';
 
 const ArticleInputForm = (props) => {
     const [editorLoaded, setEditorLoaded] = useState(false);
@@ -23,11 +24,11 @@ const ArticleInputForm = (props) => {
         }
         reset(props.data)
         setPreviewBanner(props.data.banner)
-        console.log(props.data);
     }, [isReady, props.data])
 
     const onSubmit = (data) => {
-        dispatch(postArticle(data,props.id))
+        console.log(data)
+        // dispatch(postArticle(data, props.id))
     };
 
     return (
@@ -122,6 +123,7 @@ const ArticleInputForm = (props) => {
                                 <Col className="mb-3" md={12}>
                                     <Form.Group>
                                         <Form.Label>Content</Form.Label>
+                                        {/* <Tiptap></Tiptap> */}
                                         <Controller
                                             control={control}
                                             name='content.id'

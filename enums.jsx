@@ -59,17 +59,17 @@ const langPreference = (value = null) => {
             string: 'Japan'   
         }
     }
-    if (value !== null && attr[value] !== undefined) {
-        return attr[value];
-    }else if(attr[value] !== undefined){
+    if (value !== null && lang[value] !== undefined) {
+        return lang[value];
+    }else if(lang[value] !== undefined){
         return {
             src:'',
             string:''
         }
     }
-    return Object.keys(attr).map(key => ({
+    return Object.keys(lang).map(key => ({
         key,
-        ...attr[key]
+        ...lang[key]
     }));
 }
 
