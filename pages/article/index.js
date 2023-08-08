@@ -28,7 +28,7 @@ const Search = ({ search, setSearch, searchDate, searchStatus, searchFieldHandle
             </Col>
             <Col md={3} className="d-flex mb-3">
                 <Link
-                    variant="success" 
+                    variant="success"
                     className="btn btn-success align-self-end"
                     href="/article/create"
                 ><i className="fe fe-plus-square"></i> Create</Link>
@@ -88,7 +88,7 @@ const PromoListPage = () => {
 
     const editAction = (id) => {
         // window.open(`/promo/${id}/detail`, '_blank'); // New Table
-        router.push(`order/${id}/detail`) // Redirect
+        router.push(`article/${id}/detail`) // Redirect
     }
 
     const deleteAction = (id) => {

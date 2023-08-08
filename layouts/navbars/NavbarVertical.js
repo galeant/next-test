@@ -215,7 +215,7 @@ const NavbarVertical = (props) => {
 								return (
 									<Card bsPrefix="nav-item" key={index}>
 										{/* menu item without any childern items like Documentation and Changelog items*/}
-										<Link href={menu.link} className={`nav-link ${location.pathname === menu.link ? 'active' : ''}`}>
+										<Link href={menu.link} className={`nav-link ${location.pathname.match(menu.link) ? 'active' : ''}`}>
 											{typeof menu.icon === 'string' ? (
 												<i className={`nav-icon fe fe-${menu.icon} me-2`}></i>
 											) : (menu.icon)}

@@ -14,6 +14,7 @@
     "@ckeditor/ckeditor5-alignment": "^38.1.1",
     "@ckeditor/ckeditor5-build-classic": "^38.1.1",
     "@ckeditor/ckeditor5-react": "^6.1.0",
+    "@tinymce/tinymce-react": "^4.3.0",
     "@vercel/analytics": "^1.0.0",
     "apexcharts": "^3.37.3",
     "axios": "^1.4.0",

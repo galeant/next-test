@@ -5,16 +5,16 @@ import { getArticleDetail } from 'redux/action/article'
 import { useRouter } from 'next/router';
 
 const ArticletDetail = () => {
-    const {isReady,query} = useRouter();
+    const { isReady, query } = useRouter();
     const dispatch = useDispatch();
     const articleDetail = useSelector((state) => state.article.detail)
 
     useEffect(() => {
-        if(isReady){
+        if (isReady) {
             dispatch(getArticleDetail(query.id))
         }
     }, [isReady])
-    
+
     return (
         <ArticleInputForm
             id={articleDetail.id}

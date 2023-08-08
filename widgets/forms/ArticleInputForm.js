@@ -8,7 +8,7 @@ import DatePicker from "react-datepicker";
 import CKEditor from "widgets/CKEditor";
 import { Controller, useForm } from 'react-hook-form'
 import { postArticle } from 'redux/action/article';
-import Tiptap from 'widgets/Tiptap';
+import TinymceEditor from 'widgets/TinymceEditor';
 
 const ArticleInputForm = (props) => {
     const [editorLoaded, setEditorLoaded] = useState(false);
@@ -24,11 +24,12 @@ const ArticleInputForm = (props) => {
         }
         reset(props.data)
         setPreviewBanner(props.data.banner)
+        console.log(props.data)
     }, [isReady, props.data])
 
     const onSubmit = (data) => {
-        console.log(data)
-        // dispatch(postArticle(data, props.id))
+        dispatch(postArticle(data, props.id))
+        router.push('/article')
     };
 
     return (
@@ -128,7 +129,7 @@ const ArticleInputForm = (props) => {
                                             control={control}
                                             name='content.id'
                                             render={({ field }) => (
-                                                <CKEditor
+                                                <TinymceEditor
                                                     name="content.id"
                                                     onChange={(data) => {
                                                         field.onChange(data)

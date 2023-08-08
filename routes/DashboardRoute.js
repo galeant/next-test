@@ -28,7 +28,7 @@ export const DashboardMenu = [
 		id: uuid(),
 		title: 'Dashboard',
 		icon: 'home',
-		link: '/'
+		link: '/dashhboard'
 	},
 	{
 		id: uuid(),
@@ -40,7 +40,13 @@ export const DashboardMenu = [
 		id: uuid(),
 		title: 'Promo',
 		icon: 'gift',
-		link: '/'
+		link: '/promo'
+	},
+	{
+		id: uuid(),
+		title: 'Article',
+		icon: 'file-text',
+		link: '/article'
 	},
 	{
 		id: uuid(),

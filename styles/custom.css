@@ -1,3 +1,11 @@
 .ck-editor .ck-editor__main .ck-content {
     min-height: 300px;
 }
+
+.tox-tinymce {
+    z-index: 0 !important;
+}
+
+.react-datepicker-wrapper {
+    width: 100% !important;
+}

@@ -3,26 +3,26 @@ import dayjs from "dayjs";
 const defaultDetailState = {
     id: null,
     title: {
-        id:null,
-        en:null,
-        jp:null,
+        id: null,
+        en: null,
+        jp: null,
     },
-    content:{
-        id:null,
-        en:null,
-        jp:null,
+    content: {
+        id: null,
+        en: null,
+        jp: null,
     },
-    slug:{
-        id:null,
-        en:null,
-        jp:null,
+    slug: {
+        id: null,
+        en: null,
+        jp: null,
     },
-    status:null,
-    published_at:dayjs().toDate(),
-    meta_title:null,
-    meta_keyword:[],
-    meta_description:null,
-    banner:null,
+    status: null,
+    published_at: dayjs().toDate(),
+    meta_title: null,
+    meta_keyword: [],
+    meta_description: null,
+    banner: null,
 }
 
 const initialState = {
@@ -55,12 +55,12 @@ const articleReducer = (state = initialState, { type, data, id, message }) => {
 
         case 'SET_ARTICLE_DETAIL':
             let detailData = data.data;
-            detailData.published_at = dayjs(detailData.published_at).toDate()
+            detailData.published_at = dayjs(detailData.published_at_date).toDate()
             return { ...state, detail: detailData, isLoading: false };
 
         case 'SET_DEFAULT_DETAIL':
-            return { ...state, detail: defaultDetailState};
-            
+            return { ...state, detail: defaultDetailState };
+
         default:
             return state;
     }
