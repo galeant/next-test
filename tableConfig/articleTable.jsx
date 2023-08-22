@@ -5,7 +5,7 @@ import Link from "next/link";
 
 const promoTableConfig = [{
     label: 'Action',
-    toDisplay: (row, editAction, deleteAction) => {
+    toDisplay: ({ row, editAction, deleteAction }) => {
         return (
             <ButtonGroup size="sm">
                 {/* <Link href={editUrl} className="btn btn-success" target="_blank">Edit</Link> */}
@@ -17,18 +17,18 @@ const promoTableConfig = [{
     }
 }, {
     label: 'Title',
-    toDisplay: (row) => {
+    toDisplay: ({ row }) => {
         return row.title.id
     }
 }, {
     label: 'Status',
-    toDisplay: (row) => {
+    toDisplay: ({ row }) => {
         const { color, string } = articleStatus(row.status);
         return <Badge pill bg={color} className="p-2">{string}</Badge>
     }
 }, {
     label: 'Published At',
-    toDisplay: (row) => {
+    toDisplay: ({ row }) => {
         return dayjs(row.published_at).format('DD-MM-YYYY');
     }
 }]

@@ -3,14 +3,15 @@ import { Suspense, useEffect, useState } from "react";
 import { Button, Card, Col, Container, Modal, Pagination, Row, Spinner, Table } from "react-bootstrap";
 import { useSelector } from "react-redux";
 
-const TableRow = ({ config, row, editAction, deleteAction }) => {
+const TableRow = ({ config, row, editAction, deleteAction, handleModalShow }) => {
+
     return (
         <tr>
             {
                 config.map((data, key) => {
                     return (
                         <td key={key} >{
-                            data.toDisplay(row, editAction, deleteAction)
+                            data.toDisplay({ row, editAction, deleteAction, handleModalShow })
                         }</td>
                     )
                 })
@@ -19,7 +20,7 @@ const TableRow = ({ config, row, editAction, deleteAction }) => {
     )
 }
 
-const TableBody = ({ config, tableData, editAction, deleteAction }) => {
+const TableBody = ({ config, tableData, editAction, deleteAction, handleModalShow }) => {
     const { isLoading } = useSelector((state) => state.general)
     if (isLoading) {
         return (
@@ -42,6 +43,7 @@ const TableBody = ({ config, tableData, editAction, deleteAction }) => {
                     row={value}
                     editAction={() => editAction(value.id)}
                     deleteAction={() => deleteAction(value.id)}
+                    handleModalShow={handleModalShow}
                 />
             )
         })
@@ -159,6 +161,7 @@ const TableWidget = ({ ...props }) => {
                                 tableData={props.tableData}
                                 editAction={props.editAction}
                                 deleteAction={handleDialogOpen}
+                                handleModalShow={props.handleModalShow}
                             ></TableBody>
                         </tbody>
                     </Table>

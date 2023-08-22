@@ -3,6 +3,7 @@ import auth from './authReducer'
 import order from './orderReducer'
 import promo from './promoReducer'
 import article from './articleReducer';
+import contact from './contactReducer'
 
 const generalState = {
   message: null,
@@ -27,6 +28,7 @@ const rootReducer = combineReducers({
   promo,
   general,
   article,
+  contact,
 });
 
 export default rootReducer;

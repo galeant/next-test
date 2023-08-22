@@ -3,7 +3,6 @@ const initialState = {
     isLoading: true,
     dataList: [],
     detail: {},
-    dataInput: {},
     pagination: {
         perPage: 10,
         currentPage: 1,
@@ -12,9 +11,9 @@ const initialState = {
     },
 };
 
-const orderReducer = (state = initialState, { type, data, id }) => {
+const contactReducer = (state = initialState, { type, data, id }) => {
     switch (type) {
-        case 'SET_ORDER_LIST':
+        case 'SET_CONTACT_LIST':
             const res = {
                 dataList: data.data,
                 pagination: {
@@ -27,11 +26,11 @@ const orderReducer = (state = initialState, { type, data, id }) => {
                 isLoading: false,
             }
             return { ...state, ...res };
-        case 'SET_ORDER_DETAIL':
+        case 'SET_CONTACT_DETAIL':
             return { ...state, detail: data.data, isLoading: false };
         default:
             return state;
     }
 };
 
-export default orderReducer;
+export default contactReducer;

@@ -46,25 +46,25 @@ const orderStatus = (value = null, all = false) => {
 
 const langPreference = (value = null) => {
     const lang = {
-        'id':{
+        'id': {
             src: '/flag/id.webp',
             string: 'Indonesia'
         },
-        'en':{
+        'en': {
             src: '/flag/us.webp',
             string: 'English'
         },
-        'jp':{
+        'jp': {
             src: '/flag/jp.webp',
-            string: 'Japan'   
+            string: 'Japan'
         }
     }
     if (value !== null && lang[value] !== undefined) {
         return lang[value];
-    }else if(lang[value] !== undefined){
+    } else if (lang[value] !== undefined) {
         return {
-            src:'',
-            string:''
+            src: '',
+            string: ''
         }
     }
     return Object.keys(lang).map(key => ({
@@ -119,9 +119,83 @@ const articleStatus = (value = null) => {
     return attr;
 }
 
+const contactType = (value = null) => {
+    const attr = {
+        1: {
+            icon: <></>,
+            color: '',
+            string: 'Product & Quality'
+        },
+        2: {
+            icon: <></>,
+            color: '',
+            string: 'Order'
+        },
+        3: {
+            icon: <></>,
+            color: '',
+            string: 'Partnership'
+        }
+    };
+    if (value !== null) {
+        return attr[value];
+    }
+    return Object.keys(attr).map(key => ({
+        key,
+        ...attr[key]
+    }));
+}
+
+const partnerType = (value = null) => {
+    const attr = {
+        1: {
+            icon: <></>,
+            color: '',
+            string: 'Distributor'
+        },
+        2: {
+            icon: <></>,
+            color: '',
+            string: 'Agen'
+        },
+    };
+    if (value !== null) {
+        return attr[value];
+    }
+    return Object.keys(attr).map(key => ({
+        key,
+        ...attr[key]
+    }));
+}
+
+const orderType = (value = null) => {
+    const attr = {
+        1: {
+            icon: <></>,
+            color: '',
+            string: 'Direct'
+        },
+        2: {
+            icon: <></>,
+            color: '',
+            string: 'Web'
+        },
+    };
+    if (value !== null) {
+        return attr[value];
+    }
+    return Object.keys(attr).map(key => ({
+        key,
+        ...attr[key]
+    }));
+}
+
 export {
     orderStatus,
     langPreference,
     promoStatus,
     articleStatus,
+    contactType,
+    partnerType,
+    orderType,
 }
