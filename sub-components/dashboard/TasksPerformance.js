@@ -9,6 +9,25 @@ const Chart = dynamic(() => import('react-apexcharts'), { ssr: false });
 
 const TasksPerformance = () => {
 
+    const series = [44, 55, 13, 43, 22];
+    const options = {
+        chart: {
+            width: 380,
+            type: 'pie',
+        },
+        labels: ['Team A', 'Team B', 'Team C', 'Team D', 'Team E'],
+        responsive: [{
+            breakpoint: 480,
+            options: {
+                chart: {
+                    width: 200
+                },
+                legend: {
+                    position: 'bottom'
+                }
+            }
+        }]
+    };
     const perfomanceChartSeries = [100, 78, 89];
     const perfomanceChartOptions = {
         dataLabels: { enabled: !1 },
@@ -98,7 +117,7 @@ const TasksPerformance = () => {
                     <ActionMenu />
                 </div>
                 <div className="mb-8">
-                    <Chart options={perfomanceChartOptions} series={perfomanceChartSeries} type="radialBar" />
+                    <Chart options={options} series={series} type="pie" />
                 </div>
                 {/* icon with content  */}
                 <div className="d-flex align-items-center justify-content-around">
