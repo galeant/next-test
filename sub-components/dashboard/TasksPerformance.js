@@ -1,75 +1,34 @@
 // import node module libraries
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Link from 'next/link';
-import { Card, Dropdown } from 'react-bootstrap';
+import { Card, Dropdown, Button } from 'react-bootstrap';
 import { MoreVertical } from 'react-feather';
 import dynamic from 'next/dynamic'
+import { contactType, summaryTimePeriod } from "enums";
+import { useDispatch, useSelector } from "react-redux";
+import { getContactSummary } from "redux/action/contact";
+import { setLoading } from "redux/action/general";
+import { useRouter } from "next/router";
 
 const Chart = dynamic(() => import('react-apexcharts'), { ssr: false });
 
 const TasksPerformance = () => {
+    const router = useRouter();
+    const dispatch = useDispatch();
+    const contactSummary = useSelector((state) => state.contact.summary)
+    useEffect(() => {
+        dispatch(setLoading(true))
+        dispatch(getContactSummary())
+    }, [])
 
-    const series = [44, 55, 13, 43, 22];
     const options = {
-        chart: {
-            width: 380,
-            type: 'pie',
+        labels: contactType().map((v) => v.string),
+        legend: {
+            show: true,
+            position: 'bottom',
         },
-        labels: ['Team A', 'Team B', 'Team C', 'Team D', 'Team E'],
-        responsive: [{
-            breakpoint: 480,
-            options: {
-                chart: {
-                    width: 200
-                },
-                legend: {
-                    position: 'bottom'
-                }
-            }
-        }]
-    };
-    const perfomanceChartSeries = [100, 78, 89];
-    const perfomanceChartOptions = {
-        dataLabels: { enabled: !1 },
-        labels: ['Direct', 'Referral', 'Organic'],
-        colors: ['#28a745', '#ffc107', '#dc3545'],
-        plotOptions: {
-            radialBar: {
-                startAngle: -168,
-                endAngle: -450,
-                hollow: {
-                    size: '55%',
-                },
-                track: {
-                    background: 'transaprent',
-                },
-                dataLabels: {
-                    show: false,
-                }
-            }
-        },
-        chart: { type: 'radialBar' },
-        stroke: { lineCap: "round" },
-        responsive: [
-            {
-                breakpoint: 480,
-                options: {
-                    chart: {
-                        height: 300
-                    }
-                }
-            },
-            {
-                breakpoint: 5000,
-                options: {
-                    chart: {
-                        height: 320
-                    }
-                }
-            }
-        ]
-    };
 
+    };
     const CustomToggle = React.forwardRef(({ children, onClick }, ref) => (
         (<Link
             href=""
@@ -85,6 +44,11 @@ const TasksPerformance = () => {
 
     CustomToggle.displayName = 'CustomToggle';
 
+    const handlerDropdownClick = (key) => {
+        console.log(key)
+        dispatch(getContactSummary({ period: key }))
+    }
+
     const ActionMenu = () => {
         return (
             <Dropdown>
@@ -92,50 +56,43 @@ const TasksPerformance = () => {
                     <MoreVertical size="15px" className="text-muted" />
                 </Dropdown.Toggle>
                 <Dropdown.Menu align={'end'}>
-                    <Dropdown.Item eventKey="1">
-                        Action
-                    </Dropdown.Item>
-                    <Dropdown.Item eventKey="2">
-                        Another action
-                    </Dropdown.Item>
-                    <Dropdown.Item eventKey="3">
-                        Something else here
-                    </Dropdown.Item>
+                    {
+                        summaryTimePeriod.map((v) => (
+                            <Dropdown.Item
+                                key={v.key} eventKey={v.key}
+                                onClick={() => handlerDropdownClick(v.key)}
+                            >
+                                {v.string}
+                            </Dropdown.Item>
+                        ))
+                    }
                 </Dropdown.Menu>
             </Dropdown>
         );
     };
 
     return (
-        <Card className="h-100">
+        <Card>
             {/* card body  */}
             <Card.Body>
                 <div className="d-flex align-items-center justify-content-between">
                     <div>
-                        <h4 className="mb-0">Tasks Performance </h4>
+                        <h4 className="mb-0">Contact Summary </h4>
+                        <h6 className="mb-0">{contactSummary.startDate} - {contactSummary.endDate}</h6>
                     </div>
                     <ActionMenu />
                 </div>
                 <div className="mb-8">
-                    <Chart options={options} series={series} type="pie" />
+                    <Chart options={options} series={contactSummary.data} type="pie" />
                 </div>
-                {/* icon with content  */}
-                <div className="d-flex align-items-center justify-content-around">
-                    <div className="text-center">
-                        <i className="fe fe-check-circle text-success fs-3"></i>
-                        <h1 className="mt-3  mb-1 fw-bold">76%</h1>
-                        <p>Completed</p>
-                    </div>
-                    <div className="text-center">
-                        <i className="fe fe-trending-up text-warning fs-3"></i>
-                        <h1 className="mt-3  mb-1 fw-bold">32%</h1>
-                        <p>In-Progress</p>
-                    </div>
-                    <div className="text-center">
-                        <i className="fe fe-trending-down text-danger fs-3"></i>
-                        <h1 className="mt-3  mb-1 fw-bold">13%</h1>
-                        <p>Behind</p>
-                    </div>
+                <div className="d-grid gap-2">
+                    <Button
+                        variant="primary"
+                        onClick={() => router.push('/contact')}
+                    >
+                        Show All
+                    </Button>
+
                 </div>
             </Card.Body>
         </Card>

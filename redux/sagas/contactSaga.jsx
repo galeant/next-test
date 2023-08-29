@@ -1,5 +1,5 @@
 import { takeEvery, select, takeLatest, put, call } from 'redux-saga/effects';
-import { setContactList, setContactDetail } from '../action/contact'
+import { setContactList, setContactDetail, setContactSummary } from '../action/contact'
 import { getCall, postDataCall } from 'apiCall'
 import { setLoading, setError } from 'redux/action/general';
 
@@ -17,11 +17,22 @@ function* getList({ queryParams }) {
     }
 }
 
-function* getDetail({ id }) {
-    const url = `${mainUrl}/${id}/detail`
+// function* getDetail({ id }) {
+//     const url = `${mainUrl}/${id}/detail`
+//     try {
+//         const data = yield call(getCall, url);
+//         yield put(setOrderDetail(data));
+//     } catch (error) {
+//         yield put(setError(error.message));
+//     }
+// }
+
+function* getContactSummary({ params }) {
+    const urlParams = new URLSearchParams(params);
+    const url = `${mainUrl}/summary?${urlParams}`
     try {
         const data = yield call(getCall, url);
-        yield put(setOrderDetail(data));
+        yield put(setContactSummary(data));
     } catch (error) {
         yield put(setError(error.message));
     }
@@ -29,7 +40,7 @@ function* getDetail({ id }) {
 
 function* orderSaga() {
     yield takeEvery('GET_CONTACT_LIST', getList);
-    yield takeEvery('GET_CONTACT_DETAIL', getDetail);
+    yield takeEvery('GET_CONTACT_SUMMARY', getContactSummary);
 }
 
 export default orderSaga;

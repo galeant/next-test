@@ -190,6 +190,33 @@ const orderType = (value = null) => {
     }));
 }
 
+const summaryTimePeriod = [
+    {
+        key:0, 
+        string:'All Time',
+    },
+    {
+        key:1, 
+        string:'Last Week',
+    },
+    {
+        key:2, 
+        string:'Last Month',
+    },
+    {
+        key:3, 
+        string:'Last 3 Month',
+    },
+    {
+        key:4, 
+        string:'Last 6 Month',
+    },
+    {
+        key:5, 
+        string:'Last Year',
+    },
+]
+   
 export {
     orderStatus,
     langPreference,
@@ -198,4 +225,5 @@ export {
     contactType,
     partnerType,
     orderType,
+    summaryTimePeriod,
 }

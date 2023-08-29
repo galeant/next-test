@@ -19,10 +19,10 @@ const orderReducer = (state = initialState, { type, data, id }) => {
                 dataList: data.data,
                 pagination: {
                     ...state.pagination,
-                    perPage: data.meta.per_page,
-                    currentPage: data.meta.current_page,
-                    lastPage: data.meta.last_page,
-                    total: data.meta.total
+                    perPage: data.meta?.per_page ?? 10,
+                    currentPage: data.meta?.current_page ?? 1,
+                    lastPage: data.meta?.last_page ?? 1,
+                    total: data.meta?.total ?? 0
                 },
                 isLoading: false,
             }
