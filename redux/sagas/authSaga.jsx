@@ -11,6 +11,7 @@ function* login({ payload }) {
     try {
         const { data } = yield call(postDataCall, url, payload);
         cookies.set('token',data.token)
+        cookies.set('user',data.user)
         yield put(setAuth(data));
         yield put(setError({}));
     } catch (error) {
