@@ -25,7 +25,7 @@ const Home = () => {
     useEffect(() => {
         dispatch(getOrderList({ limit: 10, all: true }))
     }, [])
-    console.log(order)
+    
     return (
         <Fragment>
             <div className="bg-primary pt-10 pb-21"></div>

@@ -45,7 +45,6 @@ function* postDataFormCall(url, data) {
     };
     try {
         const res = yield axios.post(url, data, { headers });
-        console.log(res)
         return res.data;
     } catch (error) {
         const { status, data } = error.response;

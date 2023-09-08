@@ -64,7 +64,6 @@ const LoginPage = () => {
     const { errCode, message } = useSelector((state) => state.general)
 
     useEffect(() => {
-        console.log(intendedPath)
         if (token !== null) {
             dispatch(setLoading(true));
             router.push(intendedPath)

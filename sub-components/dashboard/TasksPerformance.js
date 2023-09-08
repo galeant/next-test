@@ -45,7 +45,6 @@ const TasksPerformance = () => {
     CustomToggle.displayName = 'CustomToggle';
 
     const handlerDropdownClick = (key) => {
-        console.log(key)
         dispatch(getContactSummary({ period: key }))
     }
 

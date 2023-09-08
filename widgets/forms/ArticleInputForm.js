@@ -24,7 +24,6 @@ const ArticleInputForm = (props) => {
         }
         reset(props.data)
         setPreviewBanner(props.data.banner)
-        console.log(props.data)
     }, [isReady, props.data])
 
     const onSubmit = (data) => {

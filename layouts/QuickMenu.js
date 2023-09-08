@@ -33,8 +33,7 @@ const QuickMenu = () => {
     const isDesktop = useMediaQuery({
         query: '(min-width: 1224px)'
     })
-    console.log(user)
-
+    
     const logOut = () => {
         cookies.remove('user')
         cookies.remove('token')
