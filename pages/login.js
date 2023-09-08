@@ -10,6 +10,7 @@ import { useRouter } from 'next/router';
 import { login } from 'redux/action/auth';
 import { setLoading } from 'redux/action/general';
 import Loading from './components/loading';
+import { useCookies } from 'react-cookie';
 
 const LoginComponent = ({ handleSubmit }) => {
     return (
@@ -60,13 +61,18 @@ const LoginComponent = ({ handleSubmit }) => {
 const LoginPage = () => {
     const dispatch = useDispatch();
     const router = useRouter();
-    const { token, intendedPath } = useSelector((state) => state.auth)
+    const { token, intendedPath,user } = useSelector((state) => state.auth)
     const { errCode, message } = useSelector((state) => state.general)
+    const [cookies, setCookie] = useCookies(['user']);
 
     useEffect(() => {
+        console.log(intendedPath)
         if (token !== null) {
             dispatch(setLoading(true));
             router.push(intendedPath)
+
+            setCookie('token',token, { path: '/' });
+            setCookie('user',user, { path: '/' });
         }
     }, [token]);
 

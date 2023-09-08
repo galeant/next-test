@@ -2,21 +2,26 @@ import { useEffect, useState } from 'react';
 import NavbarVertical from './navbars/NavbarVertical';
 import NavbarTop from './navbars/NavbarTop';
 import { useRouter } from 'next/router';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { Cookies } from 'react-cookie';
+import { setIntendedPath } from 'redux/action/auth';
 
 const DefaultDashboardLayout = (props) => {
+	const dispatch = useDispatch();
 	const [showMenu, setShowMenu] = useState(true);
 	const router = useRouter();
-	const { token } = useSelector((state) => state.auth)
+	const { token,user,intendedPath} = useSelector((state) => state.auth)
 	const ToggleMenu = () => {
-		return setShowMenu(!showMenu);
+		return setShowMenu(!showMenu); 	
 	};
+	const cookies = new Cookies();
 
 	useEffect(() => {
-		if (!token) {
+		if (!token || cookies.get('token') == null) {
+			dispatch(setIntendedPath(router.route))
 			router.push('/login')
 		}
-	})
+	},[router])
 
 	if (token) {
 		return (
