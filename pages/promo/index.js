@@ -50,7 +50,6 @@ const PromoListPage = () => {
     useEffect(() => {
         dispatch(setLoading(true))
         if (isReady) {
-            console.log(query)
             dispatch(getPromoList(query))
             const { search, date, status } = query;
             setSearch(search ?? '')

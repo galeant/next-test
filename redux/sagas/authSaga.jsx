@@ -2,13 +2,15 @@ import { takeLatest, put, call } from 'redux-saga/effects';
 import { postDataCall } from 'apiCall'
 import { setAuth } from '../action/auth';
 import { setError, setLoading } from '../action/general';
-// import Cookies from 'js-cookie';
+import { Cookies } from 'react-cookie';
+
+const cookies = new Cookies();
 
 function* login({ payload }) {
     const url = `/admin/login`
     try {
         const { data } = yield call(postDataCall, url, payload);
-        // Cookies.set('token', data.token, { sameSite: 'strict' });
+        cookies.set('token',data.token)
         yield put(setAuth(data));
         yield put(setError({}));
     } catch (error) {

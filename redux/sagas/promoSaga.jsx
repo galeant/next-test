@@ -1,8 +1,9 @@
 import { takeEvery, select, takeLatest, put, call } from 'redux-saga/effects';
-import { getPromoList, setPromoList, setPromoDetail, setError } from '../action/promo'
+import { getPromoList, setPromoList, setPromoDetail } from '../action/promo'
 import { getCall, postDataCall, deleteCall, postDataFormCall } from 'apiCall'
 import { setLoading } from 'redux/action/general';
 import dayjs from 'dayjs';
+import { setError } from 'redux/action/general';
 
 const mainUrl = '/admin/promo'
 
